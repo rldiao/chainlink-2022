@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { ReactElement } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ActivateDeactivate } from '../components/ActivateDeactivate';
 import { Greeter } from '../components/Greeter';
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       <SectionDivider />
       <Greeter />
     </StyledAppDiv>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

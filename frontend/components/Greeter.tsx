@@ -1,11 +1,11 @@
 import { useWeb3React } from '@web3-react/core';
-import { Contract, ethers, Signer } from 'ethers';
-import {
+import { Contract, Signer, ethers } from 'ethers';
+import React, {
   ChangeEvent,
   MouseEvent,
   ReactElement,
   useEffect,
-  useState
+  useState,
 } from 'react';
 import styled from 'styled-components';
 import GreeterArtifact from '../artifacts/contracts/Greeter.sol/Greeter.json';
@@ -94,7 +94,7 @@ export function Greeter(): ReactElement {
       const Greeter = new ethers.ContractFactory(
         GreeterArtifact.abi,
         GreeterArtifact.bytecode,
-        signer
+        signer,
       );
 
       try {
@@ -112,7 +112,7 @@ export function Greeter(): ReactElement {
         setGreeterContractAddr(greeterContract.address);
       } catch (error: any) {
         window.alert(
-          'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+          'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
         );
       }
     }
@@ -152,7 +152,7 @@ export function Greeter(): ReactElement {
         }
       } catch (error: any) {
         window.alert(
-          'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+          'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
         );
       }
     }
@@ -163,12 +163,12 @@ export function Greeter(): ReactElement {
   return (
     <>
       <StyledDeployContractButton
-        disabled={!active || greeterContract ? true : false}
-        style={{
-          cursor: !active || greeterContract ? 'not-allowed' : 'pointer',
-          borderColor: !active || greeterContract ? 'unset' : 'blue'
-        }}
-        onClick={handleDeployContract}
+          disabled={!active || greeterContract ? true : false}
+          style={{
+            cursor: !active || greeterContract ? 'not-allowed' : 'pointer',
+            borderColor: !active || greeterContract ? 'unset' : 'blue',
+          }}
+          onClick={handleDeployContract}
       >
         Deploy Greeter Contract
       </StyledDeployContractButton>
@@ -176,35 +176,35 @@ export function Greeter(): ReactElement {
       <StyledGreetingDiv>
         <StyledLabel>Contract addr</StyledLabel>
         <div>
-          {greeterContractAddr ? (
+          { greeterContractAddr ? (
             greeterContractAddr
           ) : (
-            <em>{`<Contract not yet deployed>`}</em>
-          )}
+            <em>{ '<Contract not yet deployed>' }</em>
+          ) }
         </div>
-        {/* empty placeholder div below to provide empty first row, 3rd col div for a 2x3 grid */}
+        { /* empty placeholder div below to provide empty first row, 3rd col div for a 2x3 grid */ }
         <div></div>
         <StyledLabel>Current greeting</StyledLabel>
         <div>
-          {greeting ? greeting : <em>{`<Contract not yet deployed>`}</em>}
+          { greeting ? greeting : <em>{ '<Contract not yet deployed>' }</em> }
         </div>
-        {/* empty placeholder div below to provide empty first row, 3rd col div for a 2x3 grid */}
+        { /* empty placeholder div below to provide empty first row, 3rd col div for a 2x3 grid */ }
         <div></div>
-        <StyledLabel htmlFor="greetingInput">Set new greeting</StyledLabel>
+        <StyledLabel htmlFor='greetingInput'>Set new greeting</StyledLabel>
         <StyledInput
-          id="greetingInput"
-          type="text"
-          placeholder={greeting ? '' : '<Contract not yet deployed>'}
-          onChange={handleGreetingChange}
-          style={{ fontStyle: greeting ? 'normal' : 'italic' }}
+            id='greetingInput'
+            type='text'
+            placeholder={greeting ? '' : '<Contract not yet deployed>'}
+            onChange={handleGreetingChange}
+            style={{ fontStyle: greeting ? 'normal' : 'italic' }}
         ></StyledInput>
         <StyledButton
-          disabled={!active || !greeterContract ? true : false}
-          style={{
-            cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
-            borderColor: !active || !greeterContract ? 'unset' : 'blue'
-          }}
-          onClick={handleGreetingSubmit}
+            disabled={!active || !greeterContract ? true : false}
+            style={{
+              cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
+              borderColor: !active || !greeterContract ? 'unset' : 'blue',
+            }}
+            onClick={handleGreetingSubmit}
         >
           Submit
         </StyledButton>
