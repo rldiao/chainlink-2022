@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
-import { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Provider } from '../utils/provider';
 
@@ -27,10 +27,10 @@ function ChainId(): ReactElement {
       <span>
         <strong>Chain Id</strong>
       </span>
-      <span role="img" aria-label="chain">
+      <span role='img' aria-label='chain'>
         ⛓
       </span>
-      <span>{chainId ?? ''}</span>
+      <span>{ chainId ?? '' }</span>
     </>
   );
 }
@@ -60,7 +60,7 @@ function BlockNumber(): ReactElement {
         }
 
         window.alert(
-          'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+          'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
         );
       }
     }
@@ -82,10 +82,10 @@ function BlockNumber(): ReactElement {
       <span>
         <strong>Block Number</strong>
       </span>
-      <span role="img" aria-label="numbers">
+      <span role='img' aria-label='numbers'>
         🔢
       </span>
-      <span>{blockNumber === null ? 'Error' : blockNumber ?? ''}</span>
+      <span>{ blockNumber === null ? 'Error' : blockNumber ?? '' }</span>
     </>
   );
 }
@@ -98,17 +98,17 @@ function Account(): ReactElement {
       <span>
         <strong>Account</strong>
       </span>
-      <span role="img" aria-label="robot">
+      <span role='img' aria-label='robot'>
         🤖
       </span>
       <span>
-        {typeof account === 'undefined'
+        { typeof account === 'undefined'
           ? ''
           : account
-          ? `${account.substring(0, 6)}...${account.substring(
-              account.length - 4
+            ? `${account.substring(0, 6)}...${account.substring(
+              account.length - 4,
             )}`
-          : ''}
+            : '' }
       </span>
     </>
   );
@@ -128,7 +128,7 @@ function Balance(): ReactElement {
 
     async function getBalance(
       library: Provider,
-      account: string
+      account: string,
     ): Promise<void> {
       const balance: ethers.BigNumber = await library.getBalance(account);
 
@@ -141,7 +141,7 @@ function Balance(): ReactElement {
           setBalance(undefined);
 
           window.alert(
-            'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+            'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
           );
         }
       }
@@ -170,15 +170,15 @@ function Balance(): ReactElement {
       <span>
         <strong>Balance</strong>
       </span>
-      <span role="img" aria-label="gold">
+      <span role='img' aria-label='gold'>
         💰
       </span>
       <span>
-        {balance === null
+        { balance === null
           ? 'Error'
           : balance
-          ? `Ξ${Math.round(+ethers.utils.formatEther(balance) * 1e4) / 1e4}`
-          : ''}
+            ? `Ξ${Math.round(+ethers.utils.formatEther(balance) * 1e4) / 1e4}`
+            : '' }
       </span>
     </>
   );
@@ -199,7 +199,7 @@ function NextNonce(): ReactElement {
 
     async function getNextNonce(
       library: Provider,
-      account: string
+      account: string,
     ): Promise<void> {
       const nextNonce: number = await library.getTransactionCount(account);
 
@@ -212,7 +212,7 @@ function NextNonce(): ReactElement {
           setNextNonce(undefined);
 
           window.alert(
-            'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+            'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
           );
         }
       }
@@ -240,10 +240,10 @@ function NextNonce(): ReactElement {
       <span>
         <strong>Next Nonce</strong>
       </span>
-      <span role="img" aria-label="gold">
+      <span role='img' aria-label='gold'>
         #️⃣
       </span>
-      <span>{nextNonce === null ? 'Error' : nextNonce ?? ''}</span>
+      <span>{ nextNonce === null ? 'Error' : nextNonce ?? '' }</span>
     </>
   );
 }
@@ -252,7 +252,7 @@ function StatusIcon(): ReactElement {
   const { active, error } = useWeb3React<Provider>();
 
   return (
-    <StyledStatusIcon>{active ? '🟢' : error ? '🔴' : '🟠'}</StyledStatusIcon>
+    <StyledStatusIcon>{ active ? '🟢' : error ? '🔴' : '🟠' }</StyledStatusIcon>
   );
 }
 

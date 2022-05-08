@@ -1,3 +1,5 @@
+// TODO(shevon): enable the lint rule again once testing has been completed
+/* eslint-disable no-console */
 import { useWeb3React } from '@web3-react/core';
 import { useCallback, useEffect, useState } from 'react';
 import { injected } from './connectors';
@@ -19,7 +21,7 @@ export function useEagerConnect(): boolean {
           await activate(injected, undefined, true);
         } catch (error: any) {
           window.alert(
-            'Error!' + (error && error.message ? `\n\n${error.message}` : '')
+            'Error!' + (error && error.message ? `\n\n${error.message}` : ''),
           );
         }
       }
@@ -52,17 +54,17 @@ export function useInactiveListener(suppress: boolean = false): void {
 
     if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleConnect = (): void => {
-        console.log("Handling 'connect' event");
+        console.log('Handling \'connect\' event');
         activate(injected);
       };
 
       const handleChainChanged = (chainId: string | number): void => {
-        console.log("Handling 'chainChanged' event with payload", chainId);
+        console.log('Handling \'chainChanged\' event with payload', chainId);
         activate(injected);
       };
 
       const handleAccountsChanged = (accounts: string[]): void => {
-        console.log("Handling 'accountsChanged' event with payload", accounts);
+        console.log('Handling \'accountsChanged\' event with payload', accounts);
         if (accounts.length > 0) {
           activate(injected);
         }

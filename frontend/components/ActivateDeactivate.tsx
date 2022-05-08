@@ -2,9 +2,9 @@ import { AbstractConnector } from '@web3-react/abstract-connector';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import {
   NoEthereumProviderError,
-  UserRejectedRequestError
+  UserRejectedRequestError,
 } from '@web3-react/injected-connector';
-import { MouseEvent, ReactElement, useState } from 'react';
+import React, { MouseEvent, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { injected } from '../utils/connectors';
 import { useEagerConnect, useInactiveListener } from '../utils/hooks';
@@ -21,13 +21,13 @@ function getErrorMessage(error: Error): string {
 
   switch (error.constructor) {
     case NoEthereumProviderError:
-      errorMessage = `No Ethereum browser extension detected. Please install MetaMask extension.`;
+      errorMessage = 'No Ethereum browser extension detected. Please install MetaMask extension.';
       break;
     case UnsupportedChainIdError:
-      errorMessage = `You're connected to an unsupported network.`;
+      errorMessage = 'You\'re connected to an unsupported network.';
       break;
     case UserRejectedRequestError:
-      errorMessage = `Please authorize this website to access your Ethereum account.`;
+      errorMessage = 'Please authorize this website to access your Ethereum account.';
       break;
     default:
       errorMessage = error.message;
@@ -89,12 +89,12 @@ function Activate(): ReactElement {
 
   return (
     <StyledActivateButton
-      disabled={active}
-      style={{
-        cursor: active ? 'not-allowed' : 'pointer',
-        borderColor: activating ? 'orange' : active ? 'unset' : 'green'
-      }}
-      onClick={handleActivate}
+        disabled={active}
+        style={{
+          cursor: active ? 'not-allowed' : 'pointer',
+          borderColor: activating ? 'orange' : active ? 'unset' : 'green',
+        }}
+        onClick={handleActivate}
     >
       Connect
     </StyledActivateButton>
@@ -113,12 +113,12 @@ function Deactivate(): ReactElement {
 
   return (
     <StyledDeactivateButton
-      disabled={!active}
-      style={{
-        cursor: active ? 'pointer' : 'not-allowed',
-        borderColor: active ? 'red' : 'unset'
-      }}
-      onClick={handleDeactivate}
+        disabled={!active}
+        style={{
+          cursor: active ? 'pointer' : 'not-allowed',
+          borderColor: active ? 'red' : 'unset',
+        }}
+        onClick={handleDeactivate}
     >
       Disconnect
     </StyledDeactivateButton>
@@ -129,7 +129,7 @@ export function ActivateDeactivate(): ReactElement {
   const context = useWeb3React<Provider>();
   const { error } = context;
 
-  if (!!error) {
+  if (error) {
     window.alert(getErrorMessage(error));
   }
 
