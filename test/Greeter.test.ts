@@ -1,12 +1,18 @@
 import { expect } from 'chai';
 import { ethers } from 'hardhat';
+import { Greeter } from '../typechain';
 
 describe('Greeter', function (): void {
-  it("Should return the new greeting once it's changed", async function (): Promise<void> {
-    const Greeter = await ethers.getContractFactory('Greeter');
-    const greeter = await Greeter.deploy('Hello, world!');
-    await greeter.deployed();
+  let greeter: Greeter;
 
+  this.beforeEach(async () => {
+    const Greeter = await ethers.getContractFactory('Greeter');
+    greeter = await Greeter.deploy('Hello, world!');
+    await greeter.deployed();
+  })
+
+
+  it("Should return the new greeting once it's changed", async function (): Promise<void> {
     expect(await greeter.greet()).to.equal('Hello, world!');
 
     const setGreetingTx = await greeter.setGreeting('Hola, mundo!');
