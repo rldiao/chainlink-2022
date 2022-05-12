@@ -36,6 +36,7 @@ contract Tournament {
         require(_players.length >= minTeamSize, "Team has too little players");
         require(_players.length <= maxTeamSize, "Team has too many players");
         require(teamCount < teamLimit, "Tourament is full");
+        require(teams[_teamName].length == 0, "Team name already registered");
         for (uint i = 0; i < _players.length; i++) {
             teams[_teamName].push(_players[i]);
         }
