@@ -15,11 +15,13 @@ contract Tournament {
     string blueTeamName;
     string winner;
   }
-
+  
+  address private host;
   bool private open = true;
   uint256 private minTeamSize;
   uint256 private maxTeamSize;
-  uint256 private teamLimit;
+  uint256 private minTeamCount;
+  uint256 private maxTeamCount;
   uint256 private teamCount = 0;
   string[] private teamNames;
   mapping(string => Player[]) private teams;
@@ -28,15 +30,20 @@ contract Tournament {
   Game[] private games;
   string[] private winner;
 
+  /** Create tournament with contract caller as host */
   constructor(
     uint256 _minTeamSize,
     uint256 _maxTeamSize,
-    uint256 _teamLimit
+    uint256 _minTeamCount,
+    uint256 _maxTeamCount
   ) {
-    require(_minTeamSize <= _maxTeamSize, "Invalid team sizes");
+    require(_minTeamSize <= _maxTeamSize, "Invalid team size limit");
+    require(_minTeamCount <= _maxTeamCount, "Invalid team count limit");
     minTeamSize = _minTeamSize;
     maxTeamSize = _maxTeamSize;
-    teamLimit = _teamLimit;
+    minTeamCount = _minTeamCount;
+    maxTeamCount = _maxTeamCount;
+    host = msg.sender;
   }
 
   // Adds team to tournament
@@ -47,7 +54,7 @@ contract Tournament {
     require(open, "Tournament has closed");
     require(_players.length >= minTeamSize, "Team has too little players");
     require(_players.length <= maxTeamSize, "Team has too many players");
-    require(teamCount < teamLimit, "Tourament is full");
+    require(teamCount < maxTeamCount, "Tourament is full");
     require(teams[_teamName].length == 0, "Team name already registered");
     for (uint256 i = 0; i < _players.length; i++) {
       teams[_teamName].push(_players[i]);
@@ -101,6 +108,9 @@ contract Tournament {
 
   /** Closes tournament to new registrations */
   function closeRegisteration() public {
+    require(msg.sender == host, "Only host can close tournament");
+    require(minTeamCount <= teamCount, "Not enough teams");
+    require(maxTeamCount > teamCount, "Too many teams"); // Should never trigger since there's a check during register()
     open = false;
   }
 
@@ -118,8 +128,12 @@ contract Tournament {
     return maxTeamSize;
   }
 
-  function getTeamLimit() external view returns (uint256) {
-    return teamLimit;
+  function getMinTeamCount() external view returns (uint256) {
+    return minTeamCount;
+  }
+
+  function getMaxTeamCount() external view returns (uint256) {
+    return maxTeamCount;
   }
 
   function getTeamCount() external view returns (uint256) {
