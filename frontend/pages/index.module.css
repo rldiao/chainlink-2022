@@ -1,0 +1,57 @@
+.content {
+  position: absolute;
+  height: 478px;
+  top: 50%;
+  transform: translateY(calc(-50% - 30px));
+  width: 90%;
+  border: 1px solid white;
+  display: flex;
+}
+
+.left {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.copy {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.right {
+  width: 65%;
+}
+
+.hero {
+  top: 30px;
+  right: 30px;
+  border: 1px solid white;
+  position: absolute;
+}
+
+.connectWalletBtn {
+  background-color: #0BBF9F;
+  color: white;
+  font-family: 'Poppins';
+  font-weight: 700;
+  width: 205px;
+  height: 49px;
+  border: none;
+  position: relative;
+}
+
+.connectWalletBtn:after {
+  content: '';
+  position: absolute;
+  border: 1px solid white;
+  left: 12px;
+  top: 8px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
