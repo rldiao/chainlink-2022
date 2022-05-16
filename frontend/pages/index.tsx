@@ -19,8 +19,10 @@ const Home: NextPage = () => (
         >
           <Logo/>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor aenean amet, turpis interdum ut cras. Eget et morbi egestas diam urna, faucibus ut ac scelerisque</p>
-          <button>
-            Connect Wallet
+          <button
+            className={styles.connectWalletBtn}
+          >
+            Connect my wallet
           </button>
         </div>
       </div>
