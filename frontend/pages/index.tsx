@@ -1,28 +1,10 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import styled from 'styled-components';
-import { ActivateDeactivate } from '../components/ActivateDeactivate';
-import { Greeter } from '../components/Greeter';
-import { SectionDivider } from '../components/SectionDivider';
-import { SignMessage } from '../components/SignMessage';
-import { WalletStatus } from '../components/WalletStatus';
-
-const StyledAppDiv = styled.div`
-  display: grid;
-  grid-gap: 20px;
-`;
+import { Header } from '../components/header/header';
 
 const Home: NextPage = () => {
   return (
-    <StyledAppDiv>
-      <ActivateDeactivate />
-      <SectionDivider />
-      <WalletStatus />
-      <SectionDivider />
-      <SignMessage />
-      <SectionDivider />
-      <Greeter />
-    </StyledAppDiv>
+    <Header/>
   );
 };
 
