@@ -28,6 +28,11 @@ export const Header = () => {
           More
         </li>
       </ul>
+      <button
+          className={styles.connectWalletBtn}
+      >
+        Connect my wallet
+      </button>
     </div>
   );
 };
