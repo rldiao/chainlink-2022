@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './header.module.css';
 import classNames from 'classnames';
+import React from 'react';
 import { Logo } from '../logo';
+import styles from './header.module.css';
 
 export const Header = () => {
   return (
@@ -10,24 +10,24 @@ export const Header = () => {
     >
       <Logo/>
       <ul
-        className={styles.menu}
+          className={styles.menu}
       >
-        <li 
-          className={classNames(styles.link, styles.active)}
+        <li
+            className={classNames(styles.link, styles.active)}
         >
           Home
         </li>
-        <li 
-          className={styles.link}
+        <li
+            className={styles.link}
         >
           Tournaments
         </li>
-        <li 
-          className={styles.link}
+        <li
+            className={styles.link}
         >
           More
         </li>
       </ul>
     </div>
-  )
+  );
 };
