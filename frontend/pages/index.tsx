@@ -4,6 +4,7 @@ import { Header } from '../components/header/header';
 import { Logo } from '../components/logo';
 import hero from './assets/hero.png';
 import styles from './index.module.css';
+import { Button } from '../components/button/button';
 
 const Home: NextPage = () => (
   <>
@@ -19,11 +20,11 @@ const Home: NextPage = () => (
         >
           <Logo/>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor aenean amet, turpis interdum ut cras. Eget et morbi egestas diam urna, faucibus ut ac scelerisque</p>
-          <button
-              className={styles.connectWalletBtn}
+          <Button
+              onClick={() => {}}
           >
             Connect my wallet
-          </button>
+          </Button>
         </div>
       </div>
       <div
