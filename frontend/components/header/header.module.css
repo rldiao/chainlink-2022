@@ -41,5 +41,9 @@
   height: 49px;
   background-color: transparent;
   position: absolute;
-  right: 205px;
+  right: 40px;
+}
+
+.connectWalletBtn:hover {
+  cursor: pointer;
 }

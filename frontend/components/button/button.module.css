@@ -9,6 +9,10 @@
   position: relative;
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .button:after {
   content: '';
   position: absolute;
