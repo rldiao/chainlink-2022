@@ -1,8 +1,11 @@
 import type { NextPage } from 'next';
 import React from 'react';
+import { Button } from '../components/button/button';
 import { Header } from '../components/header/header';
 import styles from './connect.module.css';
-import { Button } from '../components/button/button';
+import { FormaticIcon } from './assets/wallet_icons/formatic';
+import { MetamaskIcon } from './assets/wallet_icons/metamask';
+import { WalletConnectIcon } from './assets/wallet_icons/wallet_conntect';
 
 const Connect: NextPage = () => (
   <>
@@ -31,17 +34,17 @@ const Connect: NextPage = () => (
         <li
             className={styles.walletOption}
         >
-          Metamask
+          <MetamaskIcon/> Metamask
         </li>
         <li
             className={styles.walletOption}
         >
-          Wallet Connect
+          <WalletConnectIcon/> Wallet Connect
         </li>
         <li
             className={styles.walletOption}
         >
-          Formatic
+          <FormaticIcon/> Formatic
         </li>
       </ul>
       <div

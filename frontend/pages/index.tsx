@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import React from 'react';
+import { Button } from '../components/button/button';
 import { Header } from '../components/header/header';
 import { Logo } from '../components/logo';
 import hero from './assets/hero.png';
 import styles from './index.module.css';
-import { Button } from '../components/button/button';
 
 const Home: NextPage = () => (
   <>

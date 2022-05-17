@@ -1,6 +1,6 @@
-import styles from './button.module.css';
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import styles from './button.module.css';
 
 type Variant = 'filled' | 'outlined';
 
@@ -19,7 +19,7 @@ const getVariantClassName = (variant: Variant) => {
     case 'outlined':
       return styles.outlined;
   }
-}
+};
 
 export const Button: React.FC<ButtonProps> = ({
   onClick,
