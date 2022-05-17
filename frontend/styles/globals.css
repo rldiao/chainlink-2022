@@ -12,7 +12,7 @@ body {
 
 body {
   background-color: #222222;
-  background-size: 40px 40px;
+  background-size: 30px 30px;
   background-image:
     linear-gradient(to right, #414141 1px, transparent 0.5px),
     linear-gradient(to bottom, #414141 1px, transparent 0.5px);
