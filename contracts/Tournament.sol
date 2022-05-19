@@ -15,13 +15,14 @@ contract Tournament {
     string blueTeamName;
     string winner;
   }
-  
+
+  string private name; 
   address private host;
   bool private open = true;
+  string private password;
   uint256 private minTeamSize;
   uint256 private maxTeamSize;
-  uint256 private minTeamCount;
-  uint256 private maxTeamCount;
+  uint256 private requiredTeamCount;
   uint256 private teamCount = 0;
   string[] private teamNames;
   mapping(string => Player[]) private teams;
@@ -32,17 +33,18 @@ contract Tournament {
 
   /** Create tournament with contract caller as host */
   constructor(
+    string memory _name,
+    string memory _password,
     uint256 _minTeamSize,
     uint256 _maxTeamSize,
-    uint256 _minTeamCount,
-    uint256 _maxTeamCount
+    uint256 _requiredTeamCount
   ) {
     require(_minTeamSize <= _maxTeamSize, "Invalid team size limit");
-    require(_minTeamCount <= _maxTeamCount, "Invalid team count limit");
+    name = _name;
+    password = _password;
     minTeamSize = _minTeamSize;
     maxTeamSize = _maxTeamSize;
-    minTeamCount = _minTeamCount;
-    maxTeamCount = _maxTeamCount;
+    requiredTeamCount = _requiredTeamCount;
     host = msg.sender;
   }
 
@@ -54,7 +56,7 @@ contract Tournament {
     require(open, "Tournament has closed");
     require(_players.length >= minTeamSize, "Team has too little players");
     require(_players.length <= maxTeamSize, "Team has too many players");
-    require(teamCount < maxTeamCount, "Tourament is full");
+    require(teamCount < requiredTeamCount, "Tourament is full");
     require(teams[_teamName].length == 0, "Team name already registered");
     for (uint256 i = 0; i < _players.length; i++) {
       teams[_teamName].push(_players[i]);
@@ -109,12 +111,20 @@ contract Tournament {
   /** Closes tournament to new registrations */
   function closeRegisteration() public {
     require(msg.sender == host, "Only host can close tournament");
-    require(minTeamCount <= teamCount, "Not enough teams");
-    require(maxTeamCount > teamCount, "Too many teams"); // Should never trigger since there's a check during register()
+    require(requiredTeamCount <= teamCount, "Not enough teams");
     open = false;
   }
 
   // ----- GETTERS / SETTERS -----
+  function getPassword() external view returns (string memory) {
+    require(msg.sender == host, "Only host can see password");
+    return password;
+  }
+
+  function isPasswordRequired() external view returns (bool) {
+    bytes memory _passwordBytes = bytes(password);
+    return _passwordBytes.length != 0;
+  }
 
   function getOpen() external view returns (bool) {
     return open;
@@ -128,13 +138,10 @@ contract Tournament {
     return maxTeamSize;
   }
 
-  function getMinTeamCount() external view returns (uint256) {
-    return minTeamCount;
+  function getRequiredTeamCount() external view returns (uint256) {
+    return requiredTeamCount;
   }
 
-  function getMaxTeamCount() external view returns (uint256) {
-    return maxTeamCount;
-  }
 
   function getTeamCount() external view returns (uint256) {
     return teamCount;
