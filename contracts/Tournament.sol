@@ -67,10 +67,18 @@ contract Tournament {
 
   // Removes team from tournament, can be done when tournament is closed
   function unregister(string calldata _teamName) external {
+    require(teamCount > 0, "There are no registered teams");
     for (uint256 i = 0; i < teams[_teamName].length; i++) {
       teams[_teamName].pop();
     }
     teamCount--;
+  }
+
+  /** Closes tournament to new registrations */
+  function closeRegisteration() public {
+    require(msg.sender == host, "Only host can close tournament");
+    require(requiredTeamCount <= teamCount, "Not enough teams");
+    open = false;
   }
 
   /** Creates a game  */
@@ -106,13 +114,6 @@ contract Tournament {
   function completeTournament() external view returns (string memory) {
     require(!open, "Tournament registration is open");
     return teamNames[0];
-  }
-
-  /** Closes tournament to new registrations */
-  function closeRegisteration() public {
-    require(msg.sender == host, "Only host can close tournament");
-    require(requiredTeamCount <= teamCount, "Not enough teams");
-    open = false;
   }
 
   // ----- GETTERS / SETTERS -----
@@ -153,5 +154,9 @@ contract Tournament {
     returns (Player[] memory)
   {
     return teams[_teamName];
+  }
+
+  function getTeamNames() external view returns (string[] memory) {
+    return teamNames;
   }
 }
