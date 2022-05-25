@@ -42,6 +42,9 @@
   background-color: transparent;
   position: absolute;
   right: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .connectWalletBtn:hover {
