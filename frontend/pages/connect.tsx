@@ -13,6 +13,7 @@ const Connect: NextPage = () => {
   const { activate } = useWeb3React();
 
   async function connect(wallet: 'metamask' | 'walletConnect' | 'formatic') {
+    // TODO(shevon): Add loading state so that user knows that connection is being attempted
     const connector = wallet === 'metamask' ? metamask : (wallet === 'walletConnect' ? walletConnect : formatic);
     try {
       await activate(connector);
